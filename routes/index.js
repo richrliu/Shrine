@@ -50,6 +50,13 @@ module.exports = function(passport){
 		res.render('home', { user: req.user });
 	});
 
+	router.get('/timeSignup', isAuthenticated, function(req, res){
+		res.render('timeSignup', { user: req.user });
+		console.log("incoming");
+		console.log(req.user);
+		console.log(req);
+	});
+
 	/* Handle Logout */
 	router.get('/signout', function(req, res) {
 		req.logout();
