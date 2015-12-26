@@ -1,5 +1,6 @@
 var express = require('express');
 var verify = require('../js/verify.js');
+var timeSignup = require('../js/timeSignup.js');
 var router = express.Router();
 
 var isAuthenticated = function (req, res, next) {
@@ -55,6 +56,20 @@ module.exports = function(passport){
 		console.log("incoming");
 		console.log(req.user);
 		console.log(req);
+	});
+
+	router.post('/timeSignup', function(req, res){
+		var username = req.user.username;
+		var location = "airport"; // add train station later
+		var time = req.body.time;
+
+		timeSignup(username, location, time, function(success){
+			if (success){
+				res.redirect('/home');
+			} else{
+				res.redirect('/timeSignup');
+			}
+		});
 	});
 
 	/* Handle Logout */
