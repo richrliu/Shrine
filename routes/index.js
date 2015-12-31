@@ -2,6 +2,7 @@ var express = require('express');
 var verify = require('../js/verify.js');
 var timeSignup = require('../js/timeSignup.js');
 var updateProfile = require('../js/updateProfile.js');
+var updateUserTimes = require('../js/updateUserTimes.js');
 var router = express.Router();
 
 var isAuthenticated = function (req, res, next) {
@@ -93,9 +94,17 @@ module.exports = function(passport){
 		var date = month+'/'+day+'/'+year;
 		var data = req.body.comment;
 
+		var serial = location+","+date+","+time;
+
 		timeSignup(username, location, time, date, data, function(success){
 			if (success){
-				res.redirect('/home');
+				updateUserTimes(username, serial, function(succeed){
+					if (succeed){
+						res.redirect('/home');
+					} else{
+						res.redirect('/timeSignup');
+					}
+				});
 			} else{
 				res.redirect('/timeSignup');
 			}

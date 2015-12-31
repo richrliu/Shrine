@@ -9,7 +9,6 @@ module.exports = function(username, password, vint, callback){
             console.log('Error in Verification: '+err);
             return callback(false);
         }
-        
         if (!user){
             console.log('User Not Found with username '+username);
             return callback(false, 'User Not found.');

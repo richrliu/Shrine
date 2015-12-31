@@ -13,5 +13,6 @@ module.exports = mongoose.model('User',{
 	phoneNum: String,
 	fbUsername: String,
 	fbName: String,
-	prefEmail: String
+	prefEmail: String,
+	signedUpTimes: [String] //SERIALIZED
 });
