@@ -74,8 +74,9 @@ module.exports = function(passport){
 		var day = req.body.day;
 		var year = req.body.year;
 		var date = month+'/'+day+'/'+year;
+		var data = req.body.comment;
 
-		timeSignup(username, location, time, date, function(success){
+		timeSignup(username, location, time, date, data, function(success){
 			if (success){
 				res.redirect('/home');
 			} else{
