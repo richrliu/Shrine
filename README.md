@@ -1,4 +1,4 @@
-passport-mongo
+Shrine
 ==============
 
 This repository serves as an example of a basic Node.js application which is using [Passport](http://passportjs.org/) as the authentication middleware for authenticating against a locally configured Mongo backend
@@ -6,6 +6,7 @@ This repository serves as an example of a basic Node.js application which is usi
 Steps to run the app
 =====================
 * After cloning the repo, install the dependencies by running **npm install**
+* Start database using **mongod --dbpath ./bin/data** and use **mongo** to open up console
 * To start the server, run **npm start** on the base directory
 
 Perquisites
