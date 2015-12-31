@@ -1,6 +1,7 @@
 var express = require('express');
 var verify = require('../js/verify.js');
 var timeSignup = require('../js/timeSignup.js');
+var updateProfile = require('../js/updateProfile.js');
 var router = express.Router();
 
 var isAuthenticated = function (req, res, next) {
@@ -63,6 +64,22 @@ module.exports = function(passport){
 	router.get('/timeSignup', isAuthenticated, function(req, res){
 		redirectIfUnverified(req, res, function(){
 			res.render('timeSignup', { user: req.user });
+		});
+	});
+
+	router.get('/profile', isAuthenticated, function(req, res){
+		redirectIfUnverified(req, res, function(){
+			res.render('profile', { user: req.user });
+		});
+	});
+
+	router.post('/profile', function(req, res){
+		updateProfile(req.user, req.body, function(success){
+			if (!success){
+				res.redirect('/profile'); //maybe display error messages
+			} else{
+				res.redirect('/home');
+			}
 		});
 	});
 

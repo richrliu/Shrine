@@ -9,5 +9,9 @@ module.exports = mongoose.model('User',{
 	lastName: String,
 	school: String,
 	verified: Boolean,
-	verificationCode: String
+	verificationCode: String,
+	phoneNum: String,
+	fbUsername: String,
+	fbName: String,
+	prefEmail: String
 });

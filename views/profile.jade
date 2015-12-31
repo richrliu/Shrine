@@ -1,0 +1,21 @@
+extends layout
+
+block content
+	div.container
+		div.row
+			div.col-sm-6.col-md-4.col-md-offset-4
+				h2.text-center Enter Your Contact Information Below
+				h5.text-center All fields are optional. Just fill out the fields that you are willing to be contacted through.
+					div.signup-wall
+						#user
+							form(class='form-signin', action='/profile', method='POST')
+								h4.text-center Phone Number (Currently: #{user.phoneNum})
+								input(type='text', name='phoneNum', class='form-control', placeholder='xxx-xxx-xxxx', autofocus)
+								h4.text-center Facebook Name (Currently: #{user.fbName})
+								input(type='text', name='fbName', class='form-control', placeholder='Facebook Name')
+								h4.text-center Facebook Username (Currently: #{user.fbUsername})
+								input(type='text', name='fbUsername', class='form-control', placeholder='Facebook Username')
+								h4.text-center Preferred Email (Currently: #{user.prefEmail})
+								input(type='text', name='prefEmail', class='form-control', placeholder='name@email.com')
+								button(class='btn btn-lg btn-primary btn-block', type='submit') Update
+								span.clearfix
