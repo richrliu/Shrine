@@ -47,7 +47,7 @@ module.exports = function(passport){
                                 var tempSplit = temp.split("@");
                                 var school = tempSplit[tempSplit.length-1];
 
-                                var vint = createHash(username).substring(0,6);
+                                var vint = createHash(username).substring(10,16);
                                 // send vint in email here
                                 var smtpTransport = nodemailer.createTransport("SMTP",{
                                     service: "Gmail",  // sets automatically host, port and connection security settings
