@@ -1,7 +1,7 @@
 var LocationTime = require('../models/locationTimes.js');
 
-module.exports = function(username, loc, t, callback){
-	LocationTime.findOne({'location': loc, 'time': t}, 
+module.exports = function(username, loc, t, d, callback){
+	LocationTime.findOne({'location': loc, 'time': t, 'date': d}, 
 		function(err, locationTime){
 			if (err) {
 				console.log(err);
@@ -12,6 +12,7 @@ module.exports = function(username, loc, t, callback){
 				newLocationTime.location = loc;
 				newLocationTime.time = t;
 				newLocationTime.data = "";
+				newLocationTime.date = d;
 				newLocationTime.usernames = [username];
 				newLocationTime.save(function(err){
 					if (err) {

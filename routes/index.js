@@ -70,8 +70,12 @@ module.exports = function(passport){
 		var username = req.user.username;
 		var location = req.body.location; // add train station later
 		var time = req.body.time;
+		var month = req.body.month;
+		var day = req.body.day;
+		var year = req.body.year;
+		var date = month+'/'+day+'/'+year;
 
-		timeSignup(username, location, time, function(success){
+		timeSignup(username, location, time, date, function(success){
 			if (success){
 				res.redirect('/home');
 			} else{
