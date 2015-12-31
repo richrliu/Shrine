@@ -1,18 +1,18 @@
-var LocationTime = require('../models/locatimeTimes.js');
+var LocationTime = require('../models/locationTimes.js');
 
-module.exports = function(username, location, time, callback){
-	LocationTime.findOne({'location': location, 'time': time}, 
+module.exports = function(username, loc, t, callback){
+	LocationTime.findOne({'location': loc, 'time': t}, 
 		function(err, locationTime){
 			if (err) {
 				console.log(err);
 				callback(false);
 			}
 			if (!locationTime){
-				var users = [username];
-				var location = location;
-				var time = time;
-				var data = ''; // fix later
-				var newLocationTime = {'location': location, 'time': time, 'data': data, 'usernames': users};
+				var newLocationTime = new LocationTime();
+				newLocationTime.location = loc;
+				newLocationTime.time = t;
+				newLocationTime.data = "";
+				newLocationTime.usernames = [username];
 				newLocationTime.save(function(err){
 					if (err) {
 						console.log(err);
@@ -22,16 +22,13 @@ module.exports = function(username, location, time, callback){
 				});
 			}
 			else{
-				var users = locationTime.usernames;
-				var location = locationTime.location;
-				var time = locationTime.time;
-				var data = locationTime.data;
+				users = locationTime.usernames;
 				users.push(username);
 				// remove duplicates
 				users = users.filter(function(elem, pos) {
 				    return users.indexOf(elem) == pos;
 				});
-				locationTime = {'location': location, 'time': time, 'data': data, 'usernames': users};
+				locationTime.usernames = users;
 				locationTime.save(function(err){
 					if (err) {
 						console.log(err);

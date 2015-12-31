@@ -4,11 +4,19 @@ block content
 	div.container
 		div.row
 			div.col-sm-6.col-md-4.col-md-offset-4
-				h1.text-center.login-title Please Select a  Time
+				h1.text-center.login-title Please Select a Location and Time
 					div.signup-wall
 						form(class='form-signin', action='/timeSignup', method='POST')
+							input#airport(type='radio', name='location', value='airport')
+							label(for='airport') Raleigh-Durham Airport
+							br
+							input#trainStation(type='radio', name='location', value='trainStation')
+							label(for='airport') Durham Train Station
+							br
+							br
+							br
 							input#0000(type='radio', name='time', value='0000')
-							label(for='0000')  12:00 AM-12:30 AM 
+							label(for='0000') 12:00 AM-12:30 AM 
 							br
 							input#0030(type='radio', name='time', value='0030')
 							label(for='0030') 12:30 AM-1:00 AM

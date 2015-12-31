@@ -13,6 +13,15 @@ var isAuthenticated = function (req, res, next) {
 	res.redirect('/');
 }
 
+var redirectIfUnverified = function(req, res, next){
+	console.log(req);
+	if (req.user.verified) {
+		return next();
+	} else{
+		res.redirect('/verify');
+	}
+}
+
 module.exports = function(passport){
 
 	/* GET index page. */
@@ -52,15 +61,14 @@ module.exports = function(passport){
 	});
 
 	router.get('/timeSignup', isAuthenticated, function(req, res){
-		res.render('timeSignup', { user: req.user });
-		console.log("incoming");
-		console.log(req.user);
-		console.log(req);
+		redirectIfUnverified(req, res, function(){
+			res.render('timeSignup', { user: req.user });
+		});
 	});
 
 	router.post('/timeSignup', function(req, res){
 		var username = req.user.username;
-		var location = "airport"; // add train station later
+		var location = req.body.location; // add train station later
 		var time = req.body.time;
 
 		timeSignup(username, location, time, function(success){
