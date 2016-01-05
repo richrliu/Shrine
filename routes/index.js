@@ -3,6 +3,7 @@ var verify = require('../js/verify.js');
 var timeSignup = require('../js/timeSignup.js');
 var updateProfile = require('../js/updateProfile.js');
 var updateUserTimes = require('../js/updateUserTimes.js');
+var findPeople = require('../js/findPeople.js');
 var router = express.Router();
 
 var isAuthenticated = function (req, res, next) {
@@ -86,7 +87,8 @@ module.exports = function(passport){
 
 	router.post('/timeSignup', function(req, res){
 		var username = req.user.username;
-		var location = req.body.location; // add train station later
+		var from = req.body.from; 
+		var to = req.body.to; 
 		var time = req.body.time;
 		var month = req.body.month;
 		var day = req.body.day;
@@ -94,9 +96,9 @@ module.exports = function(passport){
 		var date = month+'/'+day+'/'+year;
 		var data = req.body.comment;
 
-		var serial = location+","+date+","+time;
+		var serial = "From: "+from+", To: "+to+", Date: "+date+", Time: "+time;
 
-		timeSignup(username, location, time, date, data, function(success){
+		timeSignup(username, from, to, time, date, data, function(success){
 			if (success){
 				updateUserTimes(username, serial, function(succeed){
 					if (succeed){
@@ -135,6 +137,26 @@ module.exports = function(passport){
 		});
 	});
 
+	router.get('/findPeople', isAuthenticated, function(req, res){
+		redirectIfUnverified(req, res, function(){
+			res.render('findPeople', { user: req.user });
+		});
+	});
+
+	router.post('/findPeople', function(req, res){
+		var from = req.body.from;
+		var to = req.body.to;
+		var date = req.body.date;
+		var time = req.body.time;
+
+		findPeople(from, to, date, time, function(success, userInfo){
+			if (!success){
+				res.render('home', {user: req.user});
+			} else{
+				res.render('findPeople', {info: userInfo});
+			}
+		});
+	});
 	return router;
 }
 

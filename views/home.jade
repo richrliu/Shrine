@@ -19,5 +19,29 @@ block content
 								li Facebook Name ---> #{user.fbName}
 								li Facebook Username ---> #{user.fbUsername}
 								li Preferred Email ---> #{user.prefEmail}
-						a(href='/profile', class='text-center new-account') Edit Your Profile Here		
+								br
+								hr
+								-var Serials = user.signedUpTimes;
+								-var Serials1 = [];
+								-Serials.forEach(function(Serial){
+								-	var splitted = Serial.split(", ");
+								-	var obj = {'from': splitted[0], 'to': splitted[1], 'date': splitted[2], 'time':splitted[3]};
+								-	Serials1.push(obj);
+								-});
+								each Serial in Serials1
+									li= Serial.from
+									li= Serial.to
+									li= Serial.date
+									li= Serial.time
+									form(action='/findPeople', method='POST')
+										input(type='hidden', name='from', value=Serial.from)
+										input(type='hidden', name='to', value=Serial.to)
+										input(type='hidden', name='date', value=Serial.date)
+										input(type='hidden', name='time', value=Serial.time)
+										br
+										button(class='btn btn-lg btn-primary btn-block', type='submit') Find People
+										br
+										br
+						a(href='/profile', class='text-center new-account') Edit Your Profile Here	
+						a(href='/timeSignup', class='text-center new-account') Sign Up For A Time	
 						a(href='/signout', class='text-center new-account') Sign Out

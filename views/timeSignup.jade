@@ -7,13 +7,28 @@ block content
 				h1.text-center.login-title Please Select a Location and Time
 					div.signup-wall
 						form(class='form-signin', action='/timeSignup', method='POST')
-							h3.text-center Location
+							h3.text-center From
 							hr
-							input#airport(type='radio', name='location', value='airport', required='')
+							input#airport(type='radio', name='from', value='airport', required='')
 							label(for='airport') Raleigh-Durham Airport
 							br
-							input#trainStation(type='radio', name='location', value='trainStation')
-							label(for='airport') Durham Train Station
+							input#trainStation(type='radio', name='from', value='trainStation')
+							label(for='trainStation') Durham Train Station
+							br
+							input#campus(type='radio', name='from', value='campus')
+							label(for='campus') Campus
+							br
+							br
+							h3.text-center To
+							hr
+							input#airport1(type='radio', name='to', value='airport', required='')
+							label(for='airport1') Raleigh-Durham Airport
+							br
+							input#trainStation1(type='radio', name='to', value='trainStation')
+							label(for='trainStation1') Durham Train Station
+							br
+							input#campus1(type='radio', name='to', value='campus')
+							label(for='campus1') Campus
 							br
 							br
 							h3.text-center Date

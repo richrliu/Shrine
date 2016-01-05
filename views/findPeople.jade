@@ -1,0 +1,16 @@
+extends layout
+
+block content
+	div.container
+		div.row
+			div.col-sm-6.col-md-4.col-md-offset-4
+				#userInfo
+					ul.user-details
+						each Info in userInfo
+							li= Info.username
+							li= Info.firstName
+							li= Info.lastName
+							li= Info.phoneNum
+							li= Info.fbName
+							li= Info.fbUsername
+							li= Info.prefEmail
