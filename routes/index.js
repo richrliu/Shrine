@@ -97,6 +97,26 @@ module.exports = function(passport){
 		var data = req.body.comment;
 
 		var serial = "From: "+from+", To: "+to+", Date: "+date+", Time: "+time;
+		
+	/* var getFormattedTime = function (time) {
+    		var hours24 = parseInt(time.substring(0, 2),10);
+    		//console.log(hours24);
+    
+    		var hours = ((hours24 + 11) % 12) + 1;
+		 //console.log(hours);
+    
+    		var amPm = hours24 > 11 ? 'pm' : 'am';
+    		var minutes = time.substring(2);
+
+    		time1 = hours + ':' + minutes + amPm;
+    
+    		var carry = minutes+30 > 60 ? 1 : 0;
+    		time2 = (hours + carry)%12 + ':' + (minutes+30)%60 + amPm;
+    
+    		return time1 + '-' + time2;
+		}
+	}); */
+
 
 		timeSignup(username, from, to, time, date, data, function(success){
 			if (success){
