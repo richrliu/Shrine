@@ -2,6 +2,10 @@ var LocationTime = require('../models/locationTimes.js');
 var User = require('../models/user.js');
 
 module.exports = function(from1, to1, date1, time1, callback){
+	console.log(from1);
+	console.log(to1);
+	console.log(date1);
+	console.log(time1);
 	LocationTime.findOne({'from': from1, 'to': to1, 'time': time1, 'date': date1}, 
 		function(err, locationTime){
 			if (err) {
@@ -12,8 +16,9 @@ module.exports = function(from1, to1, date1, time1, callback){
 				callback(false);
 			} else{
 				var userInfo = [];
-				usernames.forEach(function(username){
+				locationTime.usernames.forEach(function(username){
 					User.findOne({'username': username}, function(err, user){
+						console.log(user);
 						if (err){
 							console.log(err);
 							callback(false);
@@ -32,6 +37,7 @@ module.exports = function(from1, to1, date1, time1, callback){
 						}
 					});
 				});
+				console.log(userInfo);
 				callback(true, userInfo);
 			}
 		});

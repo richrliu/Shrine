@@ -144,14 +144,14 @@ module.exports = function(passport){
 	});
 
 	router.post('/findPeople', function(req, res){
-		var from = req.body.from;
-		var to = req.body.to;
-		var date = req.body.date;
-		var time = req.body.time;
+		var from = req.body.from.split(": ")[1];
+		var to = req.body.to.split(": ")[1];
+		var date = req.body.date.split(": ")[1];
+		var time = req.body.time.split(": ")[1];
 
 		findPeople(from, to, date, time, function(success, userInfo){
 			if (!success){
-				res.render('home', {user: req.user});
+				res.redirect('/home');
 			} else{
 				res.render('findPeople', {info: userInfo});
 			}
