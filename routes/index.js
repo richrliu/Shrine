@@ -4,6 +4,7 @@ var timeSignup = require('../js/timeSignup.js');
 var updateProfile = require('../js/updateProfile.js');
 var updateUserTimes = require('../js/updateUserTimes.js');
 var findPeople = require('../js/findPeople.js');
+var deleteEntry = require('../js/deleteEntry.js');
 var router = express.Router();
 
 var isAuthenticated = function (req, res, next) {
@@ -17,12 +18,24 @@ var isAuthenticated = function (req, res, next) {
 }
 
 var redirectIfUnverified = function(req, res, next){
-	console.log(req);
 	if (req.user.verified) {
 		return next();
 	} else{
 		res.redirect('/verify');
 	}
+}
+
+var getFormattedTime = function (time) {
+	var hours24 = parseInt(time.substring(0, 2),10);
+	var hours = ((hours24 + 11) % 12) + 1;
+	var amPm = hours24 > 11 ? 'pm' : 'am';
+	var minutes = time.substring(2);
+
+	time1 = hours + ':' + minutes + amPm;
+
+	var carry = minutes+30 > 60 ? 1 : 0;
+	time2 = (hours + carry)%12 + ':' + (minutes+30)%60 + amPm;
+	return time1 + '-' + time2;
 }
 
 module.exports = function(passport){
@@ -60,7 +73,9 @@ module.exports = function(passport){
 
 	/* GET Home Page */
 	router.get('/home', isAuthenticated, function(req, res){
-		res.render('home', { user: req.user });
+		redirectIfUnverified(req, res, function(){
+			res.render('home', { user: req.user });
+		});
 	});
 
 	router.get('/timeSignup', isAuthenticated, function(req, res){
@@ -96,26 +111,7 @@ module.exports = function(passport){
 		var date = month+'/'+day+'/'+year;
 		var data = req.body.comment;
 
-		var serial = "From: "+from+", To: "+to+", Date: "+date+", Time: "+time;
-		
-	/* var getFormattedTime = function (time) {
-    		var hours24 = parseInt(time.substring(0, 2),10);
-    		//console.log(hours24);
-    
-    		var hours = ((hours24 + 11) % 12) + 1;
-		 //console.log(hours);
-    
-    		var amPm = hours24 > 11 ? 'pm' : 'am';
-    		var minutes = time.substring(2);
-
-    		time1 = hours + ':' + minutes + amPm;
-    
-    		var carry = minutes+30 > 60 ? 1 : 0;
-    		time2 = (hours + carry)%12 + ':' + (minutes+30)%60 + amPm;
-    
-    		return time1 + '-' + time2;
-		}
-	}); */
+		var serial = "From: "+from+", To: "+to+", Date: "+date+", Time: "+time+", "+getFormattedTime(time);
 
 
 		timeSignup(username, from, to, time, date, data, function(success){
@@ -168,12 +164,32 @@ module.exports = function(passport){
 		var to = req.body.to.split(": ")[1];
 		var date = req.body.date.split(": ")[1];
 		var time = req.body.time.split(": ")[1];
+		var timeFormatted = req.body.timeFormatted; 
+		var information = {'from': from, 'to': to, 'date': date, 'time': time, 'timeFormatted': timeFormatted};
 
-		findPeople(from, to, date, time, function(success, userInfo){
+		findPeople(from, to, date, time, timeFormatted, function(success, userInfo){
 			if (!success){
 				res.redirect('/home');
 			} else{
-				res.render('findPeople', {info: userInfo});
+				res.render('findPeople', {info: userInfo, theInfo: information});
+			}
+		});
+	});
+
+	router.post('/deleteEntry', function(req, res){
+		var from = req.body.from.split(": ")[1];
+		var to = req.body.to.split(": ")[1];
+		var date = req.body.date.split(": ")[1];
+		var time = req.body.time.split(": ")[1];
+		var timeFormatted = req.body.timeFormatted; 
+		var serial = req.body.serial;
+		var username = req.user.username;
+
+		deleteEntry(from, to, date, time, username, serial, function(success){
+			if (!success){
+				res.redirect('/verify');
+			} else{
+				res.redirect('/home');
 			}
 		});
 	});

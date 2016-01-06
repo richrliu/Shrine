@@ -8,38 +8,50 @@ block content
 					h1.text-center.login-title Welcome #{user.firstName}. Check your details below:
 						div.signup-wall
 							ul.user-details
-								li Username ---> #{user.username}
-								li Email    ---> #{user.email}
-								li First Name ---> #{user.firstName} 
-								li Last Name ---> #{user.lastName}
-								li School ---> #{user.school}
-								li Verified ---> #{user.verified}
+								li Username: #{user.username}
+								li Email: #{user.email}
+								li First Name: #{user.firstName} 
+								li Last Name: #{user.lastName}
+								li School: #{user.school}
+								li Verified: #{user.verified}
 								hr
-								li Phone Number ---> #{user.phoneNum}
-								li Facebook Name ---> #{user.fbName}
-								li Facebook Username ---> #{user.fbUsername}
-								li Preferred Email ---> #{user.prefEmail}
+								li Phone Number: #{user.phoneNum}
+								li Facebook Name: #{user.fbName}
+								li Facebook Username: #{user.fbUsername}
+								li Preferred Email: #{user.prefEmail}
 								br
 								hr
+								h4.text-center You are currently signed up for the following:
+								br
 								-var Serials = user.signedUpTimes;
 								-var Serials1 = [];
 								-Serials.forEach(function(Serial){
 								-	var splitted = Serial.split(", ");
-								-	var obj = {'from': splitted[0], 'to': splitted[1], 'date': splitted[2], 'time':splitted[3]};
+								-	var obj = {'from': splitted[0], 'to': splitted[1], 'date': splitted[2], 'time':splitted[3], 'timeFormatted':splitted[4], 'serial':Serial};
 								-	Serials1.push(obj);
 								-});
 								each Serial in Serials1
 									li= Serial.from
 									li= Serial.to
 									li= Serial.date
-									li= Serial.time
+									li= 'Time: ' + Serial.timeFormatted
 									form(action='/findPeople', method='POST')
 										input(type='hidden', name='from', value=Serial.from)
 										input(type='hidden', name='to', value=Serial.to)
 										input(type='hidden', name='date', value=Serial.date)
 										input(type='hidden', name='time', value=Serial.time)
+										input(type='hidden', name='timeFormatted', value=Serial.timeFormatted)
 										br
-										button(class='btn btn-lg btn-primary btn-block', type='submit') Find People
+										button(class='btn', type='submit') Find People
+									form(action='/deleteEntry', method='POST')
+										input(type='hidden', name='from', value=Serial.from)
+										input(type='hidden', name='to', value=Serial.to)
+										input(type='hidden', name='date', value=Serial.date)
+										input(type='hidden', name='time', value=Serial.time)
+										input(type='hidden', name='timeFormatted', value=Serial.timeFormatted)
+										input(type='hidden', name='serial', value=Serial.serial)
+										br
+										button(class='btn', type='submit') Delete Entry
 										br
 										br
 						a(href='/profile', class='text-center new-account') Edit Your Profile Here	

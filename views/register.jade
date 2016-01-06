@@ -4,7 +4,9 @@ block content
 	div.container
 		div.row
 			div.col-sm-6.col-md-4.col-md-offset-4
-				h1.text-center.login-title Registration Details
+				h3.text-center Registration Details
+				h4.text-center All fields are required. Please sign up with your school email (.edu). We will send a verification code to your email.
+				a(href='/verify', class='text-center new-account') Verify your account here.
 					div.signup-wall
 						form(class='form-signin', action='/signup', method='POST')
 							input(type='text', name='username', class='form-control', placeholder='Username',required, autofocus)

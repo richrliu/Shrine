@@ -1,7 +1,7 @@
 var LocationTime = require('../models/locationTimes.js');
 var User = require('../models/user.js');
 
-module.exports = function(from1, to1, date1, time1, callback){
+module.exports = function(from1, to1, date1, time1, timeFormatted1, callback){
 	LocationTime.findOne({'from': from1, 'to': to1, 'time': time1, 'date': date1}, 
 		function(err, locationTime){
 			if (err) {

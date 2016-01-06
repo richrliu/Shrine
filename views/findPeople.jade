@@ -4,13 +4,20 @@ block content
 	div.container
 		div.row
 			div.col-sm-6.col-md-4.col-md-offset-4
-				#info
-					ul.user-details
-						each userInfo in info
-							li= userInfo.username
-							li= userInfo.firstName
-							li= userInfo.lastName
-							li= userInfo.phoneNum
-							li= userInfo.fbName
-							li= userInfo.fbUsername
-							li= userInfo.prefEmail
+				#theInfo
+					h4.text-center Showing people travelling From #{theInfo.from} To #{theInfo.to} On #{theInfo.date} At #{theInfo.timeFormatted}
+					div.signup-wall
+						#info
+							ul.user-details
+								each userInfo in info
+									li= 'Username: ' + userInfo.username
+									li= 'First name: ' + userInfo.firstName
+									li= 'Last name: ' + userInfo.lastName
+									li= 'Phone Number: ' + userInfo.phoneNum
+									li= 'Facebook Name: ' + userInfo.fbName
+									li= 'Facebook Username: ' + userInfo.fbUsername
+									li= 'Preferred Email: ' + userInfo.prefEmail
+									hr
+					a(href='/home', class='text-center new-account') Return to Home
+					a(href='/timeSignup', class='text-center new-account') Sign Up For A Time	
+					a(href='/signout', class='text-center new-account') Sign Out
