@@ -17,6 +17,10 @@ module.exports = function(username, serial, callback){
 				} else{
 					theTimes.push(serial);
 				}
+				theTimes = theTimes.filter(function(item, pos) {
+				    return theTimes.indexOf(item) == pos;
+				});
+				theTimes.sort();
 				user.signedUpTimes = theTimes;
 				user.save(function(err){
 					if (err) {

@@ -26,15 +26,19 @@ var redirectIfUnverified = function(req, res, next){
 }
 
 var getFormattedTime = function (time) {
-	var hours24 = parseInt(time.substring(0, 2),10);
+	var hours24 = parseInt(time.substring(0, 2), 10);
 	var hours = ((hours24 + 11) % 12) + 1;
 	var amPm = hours24 > 11 ? 'pm' : 'am';
-	var minutes = time.substring(2);
+	var minutes = parseInt(time.substring(2), 10);
+	var min1Str = minutes==0? "00":"30";
 
-	time1 = hours + ':' + minutes + amPm;
+	time1 = hours + ':' + min1Str + amPm;
 
-	var carry = minutes+30 > 60 ? 1 : 0;
-	time2 = (hours + carry)%12 + ':' + (minutes+30)%60 + amPm;
+	var carry = minutes+30 >= 60 ? 1 : 0;
+	var minStr = (minutes+30)%60==0? "00":"30";
+	var hrStr = (hours+carry)%12==0? "12":((hours+carry)%12).toString();
+	var amPm2 = ((hours24 + 11) % 12) + 1+carry>11? 'pm':'am';
+	time2 = hrStr + ':' + minStr + amPm2;
 	return time1 + '-' + time2;
 }
 
@@ -111,7 +115,7 @@ module.exports = function(passport){
 		var date = month+'/'+day+'/'+year;
 		var data = req.body.comment;
 
-		var serial = "From: "+from+", To: "+to+", Date: "+date+", Time: "+time+", "+getFormattedTime(time);
+		var serial = "Date: "+date+", Time: "+time+", From: "+from+", To: "+to+", "+getFormattedTime(time);
 
 
 		timeSignup(username, from, to, time, date, data, function(success){

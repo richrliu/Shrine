@@ -27,7 +27,7 @@ block content
 								-var Serials1 = [];
 								-Serials.forEach(function(Serial){
 								-	var splitted = Serial.split(", ");
-								-	var obj = {'from': splitted[0], 'to': splitted[1], 'date': splitted[2], 'time':splitted[3], 'timeFormatted':splitted[4], 'serial':Serial};
+								-	var obj = {'date': splitted[0], 'time': splitted[1], 'from': splitted[2], 'to':splitted[3], 'timeFormatted':splitted[4], 'serial':Serial};
 								-	Serials1.push(obj);
 								-});
 								each Serial in Serials1
