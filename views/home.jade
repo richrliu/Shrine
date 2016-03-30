@@ -34,7 +34,7 @@ block content
 									li= Serial.from
 									li= Serial.to
 									li= Serial.date
-									li= 'Time: ' + Serial.timeFormatted
+									li= Serial.timeFormatted
 									form(action='/findPeople', method='POST')
 										input(type='hidden', name='from', value=Serial.from)
 										input(type='hidden', name='to', value=Serial.to)

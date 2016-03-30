@@ -115,8 +115,8 @@ module.exports = function(passport){
 		var date = month+'/'+day+'/'+year;
 		var data = req.body.comment;
 
-		var serial = "Date: "+date+", Time: "+time+", From: "+from+", To: "+to+", "+getFormattedTime(time);
-
+		var serial = "Date: "+date+", Time: "+time+", From: "+from+", To: "+to+", "+"Time: "+getFormattedTime(time);
+		console.log(serial);
 
 		timeSignup(username, from, to, time, date, data, function(success){
 			if (success){

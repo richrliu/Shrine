@@ -7,15 +7,15 @@ block content
 				h3.text-center Registration Details
 				h4.text-center All fields are required. Please sign up with your school email (.edu). We will send a verification code to your email.
 				a(href='/verify', class='text-center new-account') Verify your account here.
-					div.signup-wall
-						form(class='form-signin', action='/signup', method='POST')
-							input(type='text', name='username', class='form-control', placeholder='Username',required, autofocus)
-							input(type='password', name='password', class='form-control nomargin', placeholder='Password', required)
-							input(type='email', name='email', class='form-control', placeholder='Email',required)
-							input(type='text', name='firstName', class='form-control', placeholder='First Name',required)
-							input(type='text', name='lastName', class='form-control', placeholder='Last Name',required)
-							button(class='btn btn-lg btn-primary btn-block', type='submit') Register
-							span.clearfix
-					#message
-						if message
-							h1.text-center.error-message #{message}
+				div.signup-wall
+					form(class='form-signin', action='/signup', method='POST')
+						input(type='text', name='username', class='form-control', placeholder='Username',required, autofocus)
+						input(type='password', name='password', class='form-control nomargin', placeholder='Password', required)
+						input(type='email', name='email', class='form-control', placeholder='Email',required)
+						input(type='text', name='firstName', class='form-control', placeholder='First Name',required)
+						input(type='text', name='lastName', class='form-control', placeholder='Last Name',required)
+						button(class='btn btn-lg btn-primary btn-block', type='submit') Register
+						span.clearfix
+				#message
+					if message
+						h1.text-center.error-message #{message}

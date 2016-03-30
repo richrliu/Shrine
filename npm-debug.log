@@ -7,7 +7,7 @@
 6 silly lifecycle Shrine@0.0.1~prestart: no script for prestart, continuing
 7 info lifecycle Shrine@0.0.1~start: Shrine@0.0.1
 8 verbose lifecycle Shrine@0.0.1~start: unsafe-perm in lifecycle true
-9 verbose lifecycle Shrine@0.0.1~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/richardliu/Desktop/Projects/Shrine/node_modules/.bin:/usr/local/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/opt/local/bin:/opt/local/sbin:/Users/richardliu/.rvm/gems/ruby-2.2.0/bin:/Users/richardliu/.rvm/gems/ruby-2.2.0@global/bin:/Users/richardliu/.rvm/rubies/ruby-2.2.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin:/Users/richardliu/.rvm/bin
+9 verbose lifecycle Shrine@0.0.1~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/richardliu/Desktop/Projects/Shrine/node_modules/.bin:/Users/richardliu/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin
 10 verbose lifecycle Shrine@0.0.1~start: CWD: /Users/richardliu/Desktop/Projects/Shrine
 11 silly lifecycle Shrine@0.0.1~start: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle Shrine@0.0.1~start: Returned: code: 1  signal: null
