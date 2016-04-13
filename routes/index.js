@@ -5,6 +5,9 @@ var updateProfile = require('../js/updateProfile.js');
 var updateUserTimes = require('../js/updateUserTimes.js');
 var findPeople = require('../js/findPeople.js');
 var deleteEntry = require('../js/deleteEntry.js');
+
+var API = require('./api');
+
 var router = express.Router();
 
 var isAuthenticated = function (req, res, next) {
@@ -197,9 +200,23 @@ module.exports = function(passport){
 			}
 		});
 	});
+
+
+	/**
+	 *
+	 * API METHODS
+	 *
+	 **/
+
+	 router.get('/api/travel', function(req, res){
+	 	var query = req.query;
+	 	API.getTravel(function(usersList){
+	 		//-- LOGIC GOES HERE
+	 	});
+	 });
+
 	return router;
 }
-
 
 
 
