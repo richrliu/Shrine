@@ -210,14 +210,20 @@ module.exports = function(passport){
 
 	 router.get('/api/travel', function(req, res){
 	 	var query = req.query;
-	 	API.getTravel(function(usersList){
+	 	API.getTravel(query, function(usersList){
 	 		//-- LOGIC GOES HERE
 	 	});
 	 });
+	 
+	router.get('/api/getUserByFirstName', function(req, res) {
+		var query = req.query;
+		API.findByFirst(query, function(user) {
+			res.render('getUserByFirstName', {user: user});	
+		});
+	})
 
 	return router;
 }
-
 
 
 
